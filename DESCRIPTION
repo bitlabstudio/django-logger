@@ -1,0 +1,2 @@
+A reusable Django app that allows you to log events and save them to your
+database so that you can run computations and reports on them later.
