@@ -30,13 +30,40 @@ Add ``logger`` to your ``INSTALLED_APPS``::
 
 Usage
 -----
+::
 
-TODO: Describe usage
+    from logger.utils import Logger
 
-    import logger
+    def my_function(args):
+        # create a logger instance
+        logger = Logger()
 
-    def my_view(request):
-        logger.log(...)
+        # call the ``create_log`` method
+        logger.create_log(
+            'action_name', 'parameter_type_name', 'value')
+
+
+The ``action`` argument of ``logger.create_log()`` is a string defining the
+kind of action, that is logged. E.g. 'payment' 
+You can see it as a way of grouping log items.
+
+The ``parameter_type_name`` is either a string or a list of strings containing
+the types of values stored. E.g. ['item count', 'payment amount', 'user']
+
+Finally the ``value`` argument is a list of values or a single value that can
+be either a string, an integer, a date or datetime, a decimal, a bool or a
+django model instance. E.g. [12, decimal.Decimal('299.99'), request.user]
+
+So the full call of ``create_log`` from the example would look like: ::
+    
+    logger.create_log(
+        'payment',
+        ['item count', 'payment amount', 'user'],
+        [12, decimal.Decimal('299.99'), request.user],
+    )
+
+Currently the ``Log`` objects stored this way can be reviewed through the
+django admin.
 
 
 Contribute
