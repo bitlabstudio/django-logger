@@ -12,6 +12,9 @@ class Action(models.Model):
         verbose_name=_('Action name'),
     )
 
+    def __unicode__(self):
+        return self.name
+
 
 class ActionParameterType(models.Model):
     """
@@ -24,6 +27,9 @@ class ActionParameterType(models.Model):
         max_length=64,
         verbose_name=_('Action parameter type'),
     )
+
+    def __unicode__(self):
+        return self.name
 
 
 class ActionParameter(models.Model):
@@ -86,6 +92,13 @@ class ActionParameter(models.Model):
         'object_id',
     )
 
+    def __unicode__(self):
+        return '{0} - {1}'.format(self.parameter_type, self.get_value())
+
+    def get_value(self):
+        # TODO
+        return 'foo'
+
 
 class Log(models.Model):
     """
@@ -110,3 +123,12 @@ class Log(models.Model):
         'ActionParameter',
         verbose_name=_('action parameter'),
     )
+
+    def __unicode__(self):
+        parameters = []
+        for parameter in self.action_parameter.all():
+            parameters.append(parameter.__unicode__())
+        return '{0} - {1}'.format(
+            self.action,
+            parameters,
+        )
