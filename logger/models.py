@@ -1,4 +1,7 @@
 """Models for the ``logging`` app."""
+import datetime
+import decimal
+
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -96,8 +99,37 @@ class ActionParameter(models.Model):
         return '{0} - {1}'.format(self.parameter_type, self.get_value())
 
     def get_value(self):
-        # TODO
-        return 'foo'
+        """Iterates over value fields and returns the one not being None."""
+        for field in self._meta.get_all_field_names():
+            if field.startswith('value_'):
+                value = getattr(self, field)
+                if value is not None:
+                    return value
+        # this is not recognized as fields so it is added manually
+        if self.value_object is not None:
+            return self.value_object
+        return None
+
+    def set_value(self, value):
+        """
+        Goes through all possible types and stores the value to the correct
+        field.
+
+        """
+        value_type = type(value)
+        if value_type == int:
+            self.value_int = str(value)
+        elif value_type == str:
+            self.value_char = value
+        elif value_type == bool:
+            self.value_bool = value
+        elif value_type == datetime.datetime:
+            self.value_time = value
+        elif value_type == decimal.Decimal:
+            self.value_decimal = value
+        elif hasattr(value, 'pk'):
+            self.value_object = value
+        return self
 
 
 class Log(models.Model):
