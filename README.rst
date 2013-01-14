@@ -32,7 +32,7 @@ Usage
 -----
 ::
 
-    from logger.utils import Logger
+    from logger import Logger
 
     def my_function(args):
         # create a logger instance

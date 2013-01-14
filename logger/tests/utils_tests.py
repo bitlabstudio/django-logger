@@ -2,7 +2,7 @@
 from django.test import TestCase
 
 from logger.models import ActionParameter, Log
-from logger.utils import Logger
+from logger import Logger
 
 
 class LoggerTestCase(TestCase):
