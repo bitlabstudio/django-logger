@@ -1,4 +1,4 @@
-"""Models for the ``logging`` app."""
+"""Models for the ``logger`` app."""
 import datetime
 import decimal
 
@@ -42,6 +42,15 @@ class ActionParameter(models.Model):
     E.g. 34.10 for an ``ActionParameter`` called "amount".
 
     :parameter_type: The type of parameter this amount belongs to.
+    :value_char: Character value for this parameter.
+    :value_int: Integer value for this parameter.
+    :value_time: Datetime value for this parameter.
+    :value_decimal: Decimal value for this parameter.
+    :value_bool: Boolean value for this parameter.
+    :value_object: Object value for this parameter.
+    :content_type: FK to ContentType of the related object.
+    :object_id: Integer representing the id of the related object.
+
     """
     parameter_type = models.ForeignKey(
         'ActionParameterType',
