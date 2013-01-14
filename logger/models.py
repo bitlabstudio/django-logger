@@ -166,10 +166,8 @@ class Log(models.Model):
     )
 
     def __unicode__(self):
-        parameters = []
-        for parameter in self.action_parameter.all():
-            parameters.append(parameter.__unicode__())
-        return '{0} - {1}'.format(
-            self.action,
-            parameters,
-        )
+        parameters = [
+            parameter.__unicode__()
+            for parameter in self.action_parameter.all()
+        ]
+        return '{0} - {1}'.format(self.action, parameters)

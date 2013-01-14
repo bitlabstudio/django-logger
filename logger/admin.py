@@ -9,13 +9,15 @@ from logger.models import (
 )
 
 
-class ActionAndActionParameterTypeAdmin(admin.ModelAdmin):
-    """
-    Custom admin for the ``Action`` and the ``ActionParameterType`` model.
-
-    """
+class ActionAdmin(admin.ModelAdmin):
+    """Custom admin for the ``Action`` model."""
     search_fields = ['name', ]
     list_filter = ('name', )
+
+
+class ActionParameterTypeAdmin(ActionAdmin):
+    """Custom admin for the ``ActionParameterType`` model."""
+    pass
 
 
 class ActionParameterAdmin(admin.ModelAdmin):
@@ -35,7 +37,7 @@ class LogAdmin(admin.ModelAdmin):
     list_filter = ('action__name', )
 
 
-admin.site.register(Action, ActionAndActionParameterTypeAdmin)
+admin.site.register(Action, ActionAdmin)
 admin.site.register(ActionParameter, ActionParameterAdmin)
-admin.site.register(ActionParameterType, ActionAndActionParameterTypeAdmin)
+admin.site.register(ActionParameterType, ActionParameterTypeAdmin)
 admin.site.register(Log, LogAdmin)
