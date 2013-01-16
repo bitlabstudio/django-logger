@@ -1,10 +1,10 @@
 """Models for the ``logger`` app."""
-import datetime
 import decimal
 
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.timezone import datetime
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -132,7 +132,7 @@ class ActionParameter(models.Model):
             self.value_char = value
         elif value_type == bool:
             self.value_bool = value
-        elif value_type == datetime.datetime:
+        elif value_type == datetime:
             self.value_time = value
         elif value_type == decimal.Decimal:
             self.value_decimal = value
