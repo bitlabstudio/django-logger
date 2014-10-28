@@ -1,3 +1,18 @@
+To be removed!
+==============
+
+This app is no longer maintained or developed and is soon to be removed.
+It was merely a draft, but it turned out, that there are far too many better solutions for this problem.
+
+For statistics we now use django-influxdb-metrics_ with grafana_.
+
+.. _django-influxdb-metrics: https://github.com/bitmazk/django-influxdb-metrics
+.. _grafana: http://grafana.org/
+
+For logging certain events you might want to check out django-object-events_.
+
+.. _django-object-events: https://github.com/bitmazk/django-object-events
+
 Django Logger
 =============
 
@@ -12,11 +27,7 @@ You need to install the following prerequisites in order to use this app::
 
     pip install Django
 
-If you want to install the latest stable release from PyPi::
-
-    $ pip install django-logger
-
-If you feel adventurous and want to install the latest commit from GitHub::
+To install the latest commit from GitHub::
 
     $ pip install -e git://github.com/bitmazk/django-logger.git#egg=logger
 
